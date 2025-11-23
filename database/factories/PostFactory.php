@@ -23,4 +23,24 @@ class PostFactory extends Factory
             'published_at' => now(),
         ];
     }
+
+    public function draft(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_draft' => true,
+                'published_at' => null,
+            ];
+        });
+    }
+
+    public function scheduled(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'is_draft' => false,
+                'published_at' => now()->addDays(1),
+            ];
+        });
+    }
 }
